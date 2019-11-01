@@ -1,0 +1,13 @@
+Package: seqGlue
+Type: Package
+Title: Makes sequencing data come together like glue
+Version: 0.1
+Date: 2019-11-01
+Author: Scott Furlan
+Maintainer: Scott Furlan <scottfurlan@gmail.com>
+Description: Lots of stuff
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.2)
+LinkingTo: Rcpp
+RoxygenNote: 6.1.1
+Encoding: UTF-8
