@@ -21,8 +21,8 @@
 
 writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", gct_filename="data.gct", cls_filename="data.cls") 
 {
-  gct_filename<-file_path_as_absolute(gct_filename)
-  cls_filename<-file_path_as_absolute(cls_filename)
+  #gct_filename<-file_path_as_absolute(gct_filename)
+  #cls_filename<-file_path_as_absolute(cls_filename)
   if(class(object)=="DESeqDataSet"){
     object<-object[,order(colData(object)[[class_labels]])]
     exprMat<-counts(object, normalized=TRUE)
@@ -69,7 +69,7 @@ writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", g
   rownames(exprMat) = paste(rn, "na", sep = "\t")
   write.table(exprMat, file = gct_filename, append = T, quote = F, 
               sep = "\t", na = "", row.names = T, col.names = F)
-  message(paste0("GCT File written:\n", gct_filename, "\n"))
+  message(paste0("GCT File written:\n", file_path_as_absolute(gct_filename), "\n"))
   nConds = length(class_labels)
   uniqueLabels = levels(class_labels)
   write(paste(nConds, length(uniqueLabels), "1", sep = " "), 
@@ -78,5 +78,5 @@ writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", g
         file = cls_filename, append = T)
   write(as.numeric(class_labels)-1, file = cls_filename, append = T, 
         sep = " ", ncolumns = nConds)
-  message(paste0("CLS File written:\n", cls_filename, "\n"))
+  message(paste0("CLS File written:\n", file_path_as_absolute(cls_filename), "\n"))
 }
