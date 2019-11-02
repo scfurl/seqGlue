@@ -1,12 +1,12 @@
 
-# piperna
+# seqGlue
 ==========
 
 version 0.1
 
 ## Installation
 
-Installation can probably be done correctly many different ways.  
+Installation can be done as so.
 
 ```
 devtools::install_github('scfurl/seqGlue')
