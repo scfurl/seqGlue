@@ -7,7 +7,8 @@ Author: Scott Furlan
 Maintainer: Scott Furlan <scottfurlan@gmail.com>
 Description: Lots of stuff
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.2)
+Imports: Rcpp (>= 1.0.2),
+  matrixStats (>= 0.5.0)
 LinkingTo: Rcpp
 RoxygenNote: 6.1.1
 Encoding: UTF-8
