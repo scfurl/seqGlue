@@ -3,32 +3,23 @@
 \alias{seqGlue}
 \docType{package}
 \title{
-  A short title line describing what the package does
+  Makes sequencing data come together like glue
 }
 \description{
-  A more detailed description of what the package does. A length
-  of about one to five lines is recommended.
+  More to come here
 }
 \details{
-  This section should provide a more detailed overview of how to use the
-  package, including the most important functions.
+  Currently we have one function: makeGSEAfiles
 }
 \author{
-Your Name, email optional.
+Scott Furlan
 
-Maintainer: Your Name <your@email.com>
+Maintainer: Scott Furlan <scottfurlan@gmail.com>
 }
 \references{
-  This optional section can contain literature or other references for
-  background information.
+  None yet
 }
 \keyword{ package }
-\seealso{
-  Optional links to other man pages
-}
 \examples{
-  \dontrun{
-     ## Optional simple examples of the most important functions
-     ## These can be in \dontrun{} and \donttest{} blocks.   
-  }
+     writeGSEAfiles(dds, class_labels="group") 
 }
