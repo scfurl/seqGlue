@@ -98,7 +98,7 @@ calc_dispersion<-function (obj, min_cells_detected=1, min_exprs = 1, id_tag="id"
     res[res$mu == 0]$mu = NA
     res[res$mu == 0]$disp = NA
     res$disp[res$disp < 0] <- 0
-    res[[id_tag]] <- row.names(data)
+    res[[id_tag]] <- row.names(obj)
     disp_table <- subset(res, is.na(mu) == FALSE)
     res <- parametricDispersionFit(disp_table, verbose = T)
     fit <- res[[1]]
