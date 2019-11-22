@@ -39,8 +39,9 @@ dataExport<-function (object, filename, data_type=c("normalized_counts", "raw_co
     symbol<-fData[[symbol_name]]
     uid<-fData[[unique_id_column]]
     df<-data.frame(symbol=symbol, uid=uid)
-    df<-cbind(df, exprMat)
-    chdf<-apply(df, 2, as.character)
+    sexprMat<-format(exprMat, scientific = FALSE)
+    bounddf<-cbind(df, sexprMat)
+    chdf<-apply(bounddf, 2, as.character)
     pData_df<-data.frame(t(as.matrix(pData)))
     colnames(pData_df)<-colnames(exprMat)
     symbol_p<-rep("", nrow(pData_df))
@@ -69,8 +70,9 @@ dataExport<-function (object, filename, data_type=c("normalized_counts", "raw_co
     symbol<-fData[[symbol_name]]
     uid<-fData[[unique_id_column]]
     df<-data.frame(symbol=symbol, uid=uid)
-    df<-cbind(df, exprMat)
-    chdf<-apply(df, 2, as.character)
+    sexprMat<-format(exprMat, scientific = FALSE)
+    bounddf<-cbind(df, sexprMat)
+    chdf<-apply(bounddf, 2, as.character)
     pData_df<-data.frame(t(as.matrix(pData)))
     colnames(pData_df)<-colnames(exprMat)
     symbol_p<-rep("", nrow(pData_df))
