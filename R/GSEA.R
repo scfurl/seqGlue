@@ -14,7 +14,7 @@
 #' @references Orchestrating high-throughput genomic analysis with Bioconductor. W. Huber, V.J. Carey, 
 #' R. Gentleman, ..., M. Morgan Nature Methods, 2015:12, 115.
 #' @importFrom tools file_path_as_absolute
-#' @importFrom matrixStats rowVars
+#' @importFrom DelayedMatrixStats rowVars
 #' @import data.table
 #' @export
 
