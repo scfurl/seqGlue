@@ -19,13 +19,13 @@
 #' @export
 
 
-writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", gct_filename="data.gct", cls_filename="data.cls") 
+writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", gct_filename="data.gct", cls_filename="data.cls", normalized=FALSE) 
 {
   #gct_filename<-file_path_as_absolute(gct_filename)
   #cls_filename<-file_path_as_absolute(cls_filename)
   if(class(object)=="DESeqDataSet"){
     object<-object[,order(colData(object)[[class_labels]])]
-    exprMat<-counts(object, normalized=TRUE)
+    exprMat<-counts(object, normalized=normalized)
     class_labels=colData(object)[[class_labels]]
     rn<-mcols(object)[[gene_labels]]
     

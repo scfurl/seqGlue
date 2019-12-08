@@ -95,8 +95,8 @@ calc_dispersion<-function (obj, min_cells_detected=1, min_exprs = 1, id_tag="id"
     disp_guess_meth_moments <- f_expression_var - xim * f_expression_mean
     disp_guess_meth_moments <- disp_guess_meth_moments/(f_expression_mean^2)
     res <- data.frame(mu = as.vector(f_expression_mean), disp = as.vector(disp_guess_meth_moments))
-    res[res$mu == 0]$mu = NA
-    res[res$mu == 0]$disp = NA
+    # res[res$mu == 0,]$mu = NA
+    # res[res$mu == 0,]$disp = NA
     res$disp[res$disp < 0] <- 0
     res[[id_tag]] <- row.names(obj)
     disp_table <- subset(res, is.na(mu) == FALSE)
