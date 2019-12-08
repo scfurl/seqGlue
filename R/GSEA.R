@@ -19,7 +19,7 @@
 #' @export
 
 
-writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", gct_filename="data.gct", cls_filename="data.cls", normalized=FALSE) 
+writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", gct_filename="data.gct", cls_filename="data.cls", normalized=TRUE) 
 {
   #gct_filename<-file_path_as_absolute(gct_filename)
   #cls_filename<-file_path_as_absolute(cls_filename)
