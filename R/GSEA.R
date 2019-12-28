@@ -41,6 +41,22 @@ writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", g
       exprMat<-exprMat[rownames(exprMat) %in% tokeep,]
     }
   }
+  if(class(object)=="cell_data_set"){
+    object<-object[,order(pData(object)[[class_labels]])]
+    exprMat<-as.matrix(counts(object, normalized=normalized))
+    class_labels=pData(object)[[class_labels]]
+    rn<-fData(object)[[gene_labels]]
+    if (length(make.unique(rn)) != length(unique(rn))) {
+      unique_rn<-rownames(exprMat)[!rn %in% rn[duplicated(rn)]]
+      duplicated_rn<-rownames(exprMat)[rn %in% rn[duplicated(rn)]]
+      duplicated_lab<-rn[rn %in% rn[duplicated(rn)]]
+      warning("Non unique gene_labels found in data; these have been collapsed keeping the label that has the greatest variance of normalized data")
+      duplicated<-exprMat[rn %in% rn[duplicated(rn)],]
+      ts = data.table(rowV = rowVars(duplicated), rn_D=duplicated_lab, rn_U=duplicated_rn)
+      tokeep<-c(ts[ , .SD[which.max(rowV)], by = rn_D]$rn_U, unique_rn)
+      exprMat<-exprMat[rownames(exprMat) %in% tokeep]
+    }
+  }
   if(class(object)=="ExpressionSet"){
     object<-object[,order(pData(object)[[class_labels]])]
     exprMat<-exprs(object)

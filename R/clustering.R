@@ -98,7 +98,7 @@ cluster<-function (obj, pd, reduction_method = c("UMAP", "tSNE", "PCA", "LSI",
       partitions <- as.factor(partitions)
     }
     else {
-      partitions <- rep(1, nrow(colData(cds)))
+      partitions <- rep(1, nrow(pd))
     }
     clusters <- factor(igraph::membership(cluster_result$optim_res))
     list(cluster_result = cluster_result, 
