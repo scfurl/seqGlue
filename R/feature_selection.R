@@ -114,10 +114,10 @@ calc_dispersion<-function (obj, min_cells_detected=1, min_exprs = 1, id_tag="id"
                                                             outliers == FALSE, ], verbose=T)
       fit <- res[[1]]
       coefs <- res[[2]]
-      names(coefs) <- c("asymptDisp", "extraPois")
-      ans <- function(q) coefs[1] + coefs[2]/q
-      attr(ans, "coefficients") <- coefs
     }
+    names(coefs) <- c("asymptDisp", "extraPois")
+    ans <- function(q) coefs[1] + coefs[2]/q
+    attr(ans, "coefficients") <- coefs
     res <- list(disp_table = disp_table, disp_func = ans)
     return(res)
   }

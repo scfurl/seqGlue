@@ -59,6 +59,7 @@ cluster<-function (obj, pd, reduction_method = c("UMAP", "tSNE", "PCA", "LSI",
           num_iter = 2, partition_qval = 0.05, weight = FALSE, resolution = NULL, 
           random_seed = NULL, verbose = F, ...) 
 {
+  cluster_method<-match.arg(cluster_method)
   reduced_dim_res <- obj
   if (is.null(random_seed)) {
     random_seed <- sample.int(.Machine$integer.max, 1)
