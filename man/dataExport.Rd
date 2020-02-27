@@ -4,9 +4,13 @@
 \alias{dataExport}
 \title{Export data to Excel file}
 \usage{
-dataExport(object, filename, data_type = c("normalized_counts",
-  "raw_counts", "vst_transformed"), unique_id_column = "id",
-  symbol_name = "gene_short_name")
+dataExport(
+  object,
+  filename,
+  data_type = c("normalized_counts", "raw_counts", "vst_transformed"),
+  unique_id_column = "id",
+  symbol_name = "gene_short_name"
+)
 }
 \arguments{
 \item{object}{the object from which function will extract data.  Currently supported objects include:
