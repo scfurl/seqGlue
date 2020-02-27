@@ -32,3 +32,35 @@ remove_duplicated_rows<-function(matrix, labels){
     return(matrix_out)
   }
 }
+
+#' Converts to long data format
+#'
+#' @description Will convert a data object (either DESeq2 object or a matrix) to a data table for further work.  
+#' @param matrix Input object with unique rownames
+#' @param coldata a factor or dataframe of factors used to add information to long data table, the string "all" can be used if the class of the input
+#' object is a DESeq2 dataset and all coldata information is to be copied to long data table
+#' @export
+#' 
+convert_to_long<-function(object, coldata="all", values_to="NormalizedExpression", names_to = "sample"){
+  if(class(object) %in% c("DESeqTransform", "DESeqDataSet")){
+    if(coldata=="all"){
+      coldata=colData(object)
+    }else{
+      coldata<-data.frame(coldata, row.names = colnames(object))
+    }
+  }
+  if(class(object) %in% c("matrix")){
+    if(coldata=="all"){
+      stop("The 'all' feature is not supported for matrix input")
+    }else{
+      coldata<-data.frame(coldata, row.names = colnames(object))
+    }
+  }
+  dt<-data.table::as.data.table(assay(object))
+  dt$Gene<-rownames(object)
+  dtl<-dt %>% tidyr::pivot_longer(-Gene, values_to = values_to, names_to = names_to)
+  dtout<-cbind(dtl, data.table::as.data.table(coldata[match(dtl[[names_to]], rownames(coldata)),]))
+  colnames(dtout)<-make.unique(colnames(dtout))
+  return(dtout)
+}
+
