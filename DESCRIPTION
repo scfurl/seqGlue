@@ -1,7 +1,7 @@
 Package: seqGlue
 Type: Package
 Title: Makes sequencing data come together like glue
-Version: 0.1
+Version: 0.2
 Date: 2019-11-01
 Author: Scott Furlan
 Maintainer: Scott Furlan <scottfurlan@gmail.com>
