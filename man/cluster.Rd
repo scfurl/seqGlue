@@ -4,20 +4,10 @@
 \alias{cluster}
 \title{Cluster cells using Louvain/Leiden community detection}
 \usage{
-cluster(
-  obj,
-  pd,
-  reduction_method = c("UMAP", "tSNE", "PCA", "LSI", "Aligned"),
-  k = 20,
-  cluster_method = c("leiden", "louvain"),
-  num_iter = 2,
-  partition_qval = 0.05,
-  weight = FALSE,
-  resolution = NULL,
-  random_seed = NULL,
-  verbose = F,
-  ...
-)
+cluster(obj, pd, reduction_method = c("UMAP", "tSNE", "PCA", "LSI",
+  "Aligned"), k = 20, cluster_method = c("leiden", "louvain"),
+  num_iter = 2, partition_qval = 0.05, weight = FALSE,
+  resolution = NULL, random_seed = NULL, verbose = F, ...)
 }
 \arguments{
 \item{obj}{input matrix}

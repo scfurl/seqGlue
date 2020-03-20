@@ -4,13 +4,8 @@
 \alias{calc_dispersion}
 \title{Calculate gene dispersion of a matrix}
 \usage{
-calc_dispersion(
-  obj,
-  min_cells_detected = 1,
-  min_exprs = 1,
-  id_tag = "id",
-  removeOutliers = TRUE
-)
+calc_dispersion(obj, min_cells_detected = 1, min_exprs = 1,
+  id_tag = "id", removeOutliers = TRUE)
 }
 \value{
 a list containing 1) a table of dispersion values and 2) the function to fit
