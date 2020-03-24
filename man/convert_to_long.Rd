@@ -4,8 +4,12 @@
 \alias{convert_to_long}
 \title{Converts to long data format}
 \usage{
-convert_to_long(object, coldata = "all",
-  values_to = "NormalizedExpression", names_to = "sample")
+convert_to_long(
+  object,
+  coldata = "all",
+  values_to = "NormalizedExpression",
+  names_to = "sample"
+)
 }
 \arguments{
 \item{coldata}{a factor or dataframe of factors used to add information to long data table, the string "all" can be used if the class of the input

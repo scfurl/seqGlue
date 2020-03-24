@@ -4,9 +4,14 @@
 \alias{writeGSEAfiles}
 \title{Write GSEA files}
 \usage{
-writeGSEAfiles(object, class_labels, gene_labels = "gene_short_name",
-  gct_filename = "data.gct", cls_filename = "data.cls",
-  normalized = TRUE)
+writeGSEAfiles(
+  object,
+  class_labels,
+  gene_labels = "gene_short_name",
+  gct_filename = "data.gct",
+  cls_filename = "data.cls",
+  normalized = TRUE
+)
 }
 \arguments{
 \item{object}{the object from which function will extract data.  Currently supported objects include:

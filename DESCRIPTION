@@ -11,7 +11,8 @@ Imports: Rcpp (>= 1.0.2),
   matrixStats (>= 0.5.0),
   data.table (>= 1.0.0),
   DESeq2 (> 1.2),
-  DelayedMatrixStats (> 1.5.0)
+  DelayedMatrixStats (> 1.5.0),
+  edgeR (> 3.1.0)
 LinkingTo: Rcpp
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Encoding: UTF-8

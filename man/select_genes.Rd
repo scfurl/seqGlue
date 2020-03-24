@@ -4,8 +4,14 @@
 \alias{select_genes}
 \title{Select features based on mean expression and variance}
 \usage{
-select_genes(obj, fit_min = 1, fit_max = Inf, logmean_ul = Inf,
-  logmean_ll = -Inf, top_n = NULL)
+select_genes(
+  obj,
+  fit_min = 1,
+  fit_max = Inf,
+  logmean_ul = Inf,
+  logmean_ll = -Inf,
+  top_n = NULL
+)
 }
 \arguments{
 \item{obj}{the output of the \code{calc_dispersion} function.}
