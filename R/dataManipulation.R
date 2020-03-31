@@ -64,3 +64,48 @@ convert_to_long<-function(object, coldata="all", values_to="NormalizedExpression
   return(dtout)
 }
 
+#' Center and scale by row
+#'
+#' @description Just like it sounds but old school
+#' @param dataset input matrix
+#' @export
+#' 
+
+center.and.scale.by.row<-function(dataset){
+  expr.mean=apply(dataset,1,mean) #Mean of each column
+  expr.sd=apply(dataset,1,sd) #Standard deviation of each column
+  expr.norm=matrix(NA,nrow(dataset),ncol(dataset))
+  for(i in 1:nrow(dataset)){
+    temp=(dataset[i,]-expr.mean[i])/expr.sd[i]
+    expr.norm[i,]=temp
+  }
+  expr.norm=as.data.frame(expr.norm)
+  expr.norm=sapply(expr.norm, function(x) as.numeric(as.character(x)))
+  rownames(expr.norm)=rownames(dataset) #CHECK THIS IS RIGHT
+  colnames(expr.norm)=colnames(dataset) #CHECK THIS IS RIGHT
+  return(expr.norm)
+}
+
+#' Center and scale by row
+#'
+#' @description Just like it sounds but old school
+#' @param dataset input matrix
+#' @export
+#' 
+center.and.scale.by.column<-function(dataset){
+  expr.mean=apply(dataset,2,mean) #Mean of each column
+  expr.sd=apply(dataset,2,sd) #Standard deviation of each column
+  expr.norm=matrix(NA,nrow(dataset),ncol(dataset))
+  for(i in 1:ncol(dataset)){
+    temp=(dataset[,i]-expr.mean[i])/expr.sd[i]
+    expr.norm[,i]=temp
+  }
+  expr.norm=as.data.frame(expr.norm)
+  expr.norm=sapply(expr.norm, function(x) as.numeric(as.character(x)))
+  rownames(expr.norm)=rownames(dataset) #CHECK THIS IS RIGHT
+  colnames(expr.norm)=colnames(dataset) #CHECK THIS IS RIGHT
+  return(expr.norm)
+}
+
+
+
