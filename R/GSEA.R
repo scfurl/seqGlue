@@ -117,19 +117,44 @@ writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", g
 #' @references fgsea package
 #' @export
 
-enrichmentPlot<-function (pathway, stats, 
-                          gseaParam = 1,  rug=T, dot_enhance="darkgrey",
+enrichmentPlot<-function (pathway, stats, object=NULL, gene_names_col="gene_short_name", 
+                          stat_col="stat", gseaParam = 1,  rug=T, dot_enhance="darkgrey",
                           dot_enhance_size=2, dot_shape=21, 
                           dot_enhance_alpha=0.7, dot_size=1,
                           return_data=FALSE,
                           print_plot=FALSE,
                           return_plot=TRUE) 
 {
+  if(!is.null(object)){
+    if(!class(object)=="DESeqDataSet"){
+      stop("Currently only DESeqDataSet supported")
+    }
+    message("Taking stats from DESeqDataSet")
+    res<-results(object)
+    res[[gene_names_col]]<-mcols(object)[[gene_names_col]]
+    rownames(res)<-res[[gene_names_col]]
+    stats=res[,stat_col]
+    names(stats)<-res[[gene_names_col]]
+    stats[is.na(stats)]<-0
+    p1<-strsplit(gsub("standard error: ","", res@elementMetadata$description[[3]])," vs ")
+    term<-strsplit(p1[[1]], " ")[[1]][1]
+    comparators<-c(strsplit(p1[[1]], " ")[[1]][2], p1[[1]][2])
+    plot_title <-paste0("Using term: ", term, "; Left: ", comparators[1], "; Right: ", comparators[2])
+    DESeq2<-TRUE
+  }else{
+    DESeq2<-FALSE
+  }
   list_amenable_args<-c("stats", "pathway")
   for(arg in list_amenable_args){
     if(class(get(arg))!="list") {assign(arg, list(get(arg)))}
   }
-  if(is.null(names(stats))){names(stats)=1:length(stats)}
+  if(is.null(names(stats))){
+    if(length(stats)==1 && length(pathway)==1){
+      names(stats)<-names(pathway)
+    }else{
+      names(stats)=1:length(stats)
+    }
+  }
   if(is.null(names(pathway))){names(pathway)=1:length(pathway)}
   stats_list_process<-function(stats, pathway){
     datalist<-lapply(1:length(stats), function(n){
@@ -231,6 +256,9 @@ enrichmentPlot<-function (pathway, stats,
     labs(x = "rank", y = "enrichment score")+ guides( size = FALSE)
   if(print_plot) print(g)
   if(return_data) return(list(plot=g, gseaRes=gseaRes, df_out=dataList))
+  if(DESeq2){
+    g<-g+ggtitle(plot_title)
+  }
   if(return_plot) return(g)
 }
 
