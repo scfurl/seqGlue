@@ -107,6 +107,9 @@ writeGSEAfiles<-function (object, class_labels, gene_labels="gene_short_name", g
 #' @param pathway = vector (or list) of genes.  Names of list will define plot coloring.
 #' @param stats = vector (or list) of ranked gene stats (usually fold change or SNR) with names \
 #' that contain the gene name.  Names of list will define plot coloring.
+#' @param object a DESeq2 object with results calculated for the comparison desired
+#' @param gene_names_col the column in mcols to assign gene symbols to
+#' @param stat_col the column in DESeq2 results to use in GSEA
 #' @param rug = whether to make a rug plot(s).
 #' @param dot_enhance character string denoting a color that enhances the dot appearance \
 #'  with another color

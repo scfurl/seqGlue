@@ -7,6 +7,9 @@
 enrichmentPlot(
   pathway,
   stats,
+  object = NULL,
+  gene_names_col = "gene_short_name",
+  stat_col = "stat",
   gseaParam = 1,
   rug = T,
   dot_enhance = "darkgrey",
@@ -24,6 +27,12 @@ enrichmentPlot(
 
 \item{stats}{= vector (or list) of ranked gene stats (usually fold change or SNR) with names \
 that contain the gene name.  Names of list will define plot coloring.}
+
+\item{object}{a DESeq2 object with results calculated for the comparison desired}
+
+\item{gene_names_col}{the column in mcols to assign gene symbols to}
+
+\item{stat_col}{the column in DESeq2 results to use in GSEA}
 
 \item{rug}{= whether to make a rug plot(s).}
 
