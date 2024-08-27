@@ -84,19 +84,19 @@ get_selected_genes<-function(obj, gene_column="id"){
 #' @importFrom DelayedMatrixStats rowVars
 #' @importFrom DESeq2 estimateSizeFactorsForMatrix
 #' 
-calc_dispersion<-function (obj, min_cells_detected=1, min_exprs = 1, id_tag="id", removeOutliers=TRUE) 
+calc_dispersion<- function (obj, min_cells_detected = 1, min_exprs = 1, id_tag = "id", 
+                            removeOutliers = TRUE) 
 {
-  if(class(obj) %in% "matrix"){
-    sf<-DESeq2::estimateSizeFactorsForMatrix(obj)
-    x <-DelayedArray(t(t(obj)/sf))
+  if (inherits(obj, "matrix")) {
+    sf <- DESeq2::estimateSizeFactorsForMatrix(obj)
+    x <- DelayedArray(t(t(obj)/sf))
     f_expression_mean <- DelayedMatrixStats::rowMeans2(obj)
     f_expression_var <- DelayedMatrixStats::rowVars(obj)
     xim <- mean(1/sf)
     disp_guess_meth_moments <- f_expression_var - xim * f_expression_mean
     disp_guess_meth_moments <- disp_guess_meth_moments/(f_expression_mean^2)
-    res <- data.frame(mu = as.vector(f_expression_mean), disp = as.vector(disp_guess_meth_moments))
-    # res[res$mu == 0,]$mu = NA
-    # res[res$mu == 0,]$disp = NA
+    res <- data.frame(mu = as.vector(f_expression_mean), 
+                      disp = as.vector(disp_guess_meth_moments))
     res$disp[res$disp < 0] <- 0
     res[[id_tag]] <- row.names(obj)
     disp_table <- subset(res, is.na(mu) == FALSE)
@@ -111,7 +111,7 @@ calc_dispersion<-function (obj, min_cells_detected=1, min_exprs = 1, id_tag="id"
       outliers <- union(names(CD[CD > cooksCutoff]), setdiff(row.names(disp_table), 
                                                              names(CD)))
       res <- parametricDispersionFit(disp_table[row.names(disp_table) %in% 
-                                                            outliers == FALSE, ], verbose=T)
+                                                  outliers == FALSE, ], verbose = T)
       fit <- res[[1]]
       coefs <- res[[2]]
     }
@@ -120,6 +120,9 @@ calc_dispersion<-function (obj, min_cells_detected=1, min_exprs = 1, id_tag="id"
     attr(ans, "coefficients") <- coefs
     res <- list(disp_table = disp_table, disp_func = ans)
     return(res)
+  } else {
+    message("Object class not supported")
+    message(paste("Object Class: ", class(obj)))
   }
 }
 
